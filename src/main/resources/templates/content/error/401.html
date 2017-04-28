@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta id="context-path" th:content="@{/}" />
+    
+    <link rel="shortcut icon" th:href="@{/images/public/icon.png}" type="image/x-icon" />
+	<link rel="icon" th:href="@{/images/public/icon.png}" type="image/x-icon" />
+    
+    <title>401</title>
+    
+    <link rel="stylesheet" th:href="@{/css/error/401.css}" />
+</head>
+<body>
+    <div class="g-bd">
+        <div class="m-bg">
+            <img class="m-img" th:src="@{/images/error/401.png}" />
+        </div>
+        <div class="m-tt">
+            <p class="m-p">权限不足</p>
+        </div>
+        <div class="m-btn-mn">
+            <button class="m-btn j-btn" type="button">重新登录</button>
+        </div>
+    </div>
+</body>
+<script th:src="@{/js/error/401.js}"></script>
+</html>

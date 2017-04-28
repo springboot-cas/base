@@ -1,0 +1,70 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <h1>文件管理</h1>
+        <ol class="breadcrumb">
+            <li>
+                <a href="javascript:;"><i class="fa fa-dashboard"></i>首页</a>
+            </li>
+            <li>
+                <a th:href="@{/files/list}">文件管理</a>
+            </li>
+        </ol>
+    </section>
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <!-- <div class="navbar">
+                            <ul class="nav navbar-nav">
+                                <li class="pull-left">
+                                    <input type="file" id="file" href="javascript:;" value="上传文件" />
+                                </li>
+                            </ul>
+                        </div> -->
+                        <div class="row">
+                            <form class="col-xs-3 pull-right">
+                                <div class="input-group">
+                                    <input id="search-input" class="form-control" placeholder="文件名称" />
+                                    <span class="input-group-btn">
+                                        <button id="search-btn" class="btn btn-info" type="button">搜索</button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="box-body m-mi-he">
+                        <table class="table table-bordered table-hover table-condensed table-striped text-center" id="j-table-1">
+                            <thead>
+	                             <tr>
+	                                 <th>文件名称</th>
+	                                 <th>更新时间</th>
+	                                 <th>操作</th>
+	                             </tr>
+                            </thead>
+                            <tbody id="fileContent"></tbody>
+                        </table>
+                        <section class="page pull-right">
+							<ul id="pagination" class="pagination"></ul>
+                       	</section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script th:src="@{/js/file/file.js}"></script>
+
+<script id="fileTmpl" type="text/x-jquery-tmpl">
+{{each(i, file) files}}
+	<tr>
+    	<td class="filename">{{= file.name}}</td>
+        <td>{{= file.lastModify}}</td>
+        <td>
+	    	<button type="button" class="btn btn-success btn-xs j-download">下载</button>
+	        <button type="button" class="btn btn-danger btn-xs j-remove">删除</button>
+	    </td>
+	</tr>
+{{/each}}
+</script>

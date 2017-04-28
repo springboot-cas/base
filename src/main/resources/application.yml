@@ -1,0 +1,41 @@
+server:
+    port: 8080
+    context-path: /base
+
+spring:
+    thymeleaf:
+        cache: false
+        cache-period: 0
+        
+    template:
+        cache: false
+    
+    http:
+        multipart:
+            max-file-size: 1024Mb
+            max-request-size: 1024Mb
+
+management:
+    port: 8081 
+    security:
+        enabled: false
+
+logging:
+    level:
+        root: INFO
+    file: logs/base.log
+
+file-path: G://backup
+
+#restful urls
+user-urls: ["http://qingdao.gclasscn.com:9003", "http://localhost:9003"]
+
+#layout
+layout: content
+full-layout: full-layout
+
+#cas configurations
+cas-server: http://qingdao.gclasscn.com/cas
+cas-service: http://127.0.0.1:8080/base/login/cas
+cas-login: http://qingdao.gclasscn.com/cas/login
+cas-logout: http://qingdao.gclasscn.com/cas/logout?service=http://127.0.0.1:8080/base

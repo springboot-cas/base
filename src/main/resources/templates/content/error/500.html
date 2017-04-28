@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta id="context-path" th:content="@{/}" />
+    
+    <link rel="shortcut icon" th:href="@{/images/public/icon.png}" type="image/x-icon" />
+	<link rel="icon" th:href="@{/images/public/icon.png}" type="image/x-icon" />
+    
+    <title>500</title>
+    
+    <link rel="stylesheet" th:href="@{/css/error/500.css}" />
+</head>
+<body>
+    <div class="g-bd">
+        <div class="m-bg">
+            <img class="m-img" th:src="@{/images/error/500.png}" />
+        </div>
+        <div class="m-tt">
+            <p class="m-p">啊哦~一不小心闯进了未知领域，请点击下面按钮返回首页……</p>
+        </div>
+        <div class="m-btn-mn">
+            <button class="m-btn j-btn" type="button">返回首页</button>
+        </div>
+    </div>
+</body>
+<script th:src="@{/js/error/500.js}"></script>
+</html>

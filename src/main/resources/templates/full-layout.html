@@ -1,0 +1,20 @@
+<html>
+	<!-- 引入公共样式 -->
+	<head th:replace="head" />
+	
+	<body class="hold-transition skin-blue sidebar-mini">
+		<div class="wrapper">
+			<!-- 头部 -->
+			<header th:replace="header" />
+			
+			<!-- 左侧导航栏 -->
+			<section th:replace="aside"></section>
+			
+			<!-- 主体部分 -->
+			<section th:replace="${templateName}"></section>
+			
+			<!-- 尾部 -->
+			<footer th:replace="footer"></footer>
+		</div>
+	</body>
+</html>
