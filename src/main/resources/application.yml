@@ -14,6 +14,21 @@ spring:
         multipart:
             max-file-size: 1024Mb
             max-request-size: 1024Mb
+            
+    kafka:
+        bootstrap-servers: 192.168.1.7:9092
+        producer:
+            batch-size: 1000
+            key-serializer: org.apache.kafka.common.serialization.StringSerializer
+            value-serializer: org.apache.kafka.common.serialization.StringSerializer
+        consumer:
+            group-id: base
+            key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+            value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        template:
+            default-topic: my-topic
+        listener:
+            concurrency: 5
 
 management:
     port: 8081 
