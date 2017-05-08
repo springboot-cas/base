@@ -4,7 +4,6 @@ import org.apache.kafka.clients.producer.RecordMetadata;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.ProducerListener;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -53,11 +52,6 @@ public class MessageController {
             }
         });
         template.send("my-topic", gson.toJson(user));
-    }
-	
-	@KafkaListener(group = "base", topics = {"my-topic"})
-    public void onMessage(String message) {
-        System.out.println("my-topic: " + message);
     }
 	
 }
