@@ -69,14 +69,13 @@ public class FileController {
 		return PageList<FileInfo>(files.size, size, fileInfos)
 	}
 	
-	private fun getFileInfos(files: List<File>, pageNum: Int, size: Int): ArrayList<FileInfo> {
+	private fun getFileInfos(files: List<File>, pageNum: Int, size: Int): List<FileInfo> {
 		var subFiles = files.subList((pageNum - 1) * size, if(((pageNum - 1) * size + size) > files.size) files.size else ((pageNum - 1) * size + size))
 		var fileInfos = arrayListOf<FileInfo>()
 		for (file in subFiles) {
 			fileInfos.add(FileInfo(file.getName(), Date(file.lastModified())))
 		}
-		fileInfos.sortedByDescending { it.lastModify }
-		return fileInfos
+		return fileInfos.sortedByDescending { it.lastModify }
 	}
 
 	/**
@@ -168,53 +167,3 @@ public class FileController {
 		}
 	}
 }
-
-fun main(args: Array<String>) {
-	
-	println(appendStr())
-	
-	println(switch(File("")))
-	
-	println(range(0))
-	
-	loop()
-	
-}
-
-/**
- * 字符串拼接
- * 声明可变参数: vararg
- */
-fun appendStr(): String? {
-	val hour = 10
-	val minute = 20
-	val second = 30
-	return "$hour:$minute:$second"
-}
-
-/**
- * when用法
- */
-fun switch(param: Any) = when(param){
-	is Number -> "数字类型"
-	is String -> "字符串类型"
-	else -> "未知类型"
-}
-
-/**
- * 检测范围[0, 10]
- */
-//fun range(number: Int): Boolean{
-//	return number in 0..10
-//}
-fun range(number: Int) = number in 0..10
-
-/**
- * 区间迭代: i范围[0, 10]
- */
-fun loop(){
-	for(i in 0..10){
-		println(i)
-	}
-}
-
