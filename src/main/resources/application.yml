@@ -16,7 +16,7 @@ spring:
             max-request-size: 1024Mb
             
     kafka:
-        bootstrap-servers: 192.168.1.7:9092
+        bootstrap-servers: qingdao.gclasscn.com:9092
         producer:
             batch-size: 1000
             key-serializer: org.apache.kafka.common.serialization.StringSerializer
