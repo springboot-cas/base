@@ -64,7 +64,7 @@ public class FileController {
 		if (!dir.exists()) {
 			throw FileNotFoundException("备份文件目录不存在, 请检查配置是否正确")
 		}
-		var files = dir.listFiles(FileFilter{file -> file.getName().contains(query)})
+		var files = dir.listFiles(FileFilter{it.getName().contains(query)})
 		var fileInfos = getFileInfos(files.asList(), pageNum, size)
 		return PageList<FileInfo>(files.size, size, fileInfos)
 	}
