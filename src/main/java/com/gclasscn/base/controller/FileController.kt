@@ -37,6 +37,8 @@ import java.io.FileFilter
 import java.util.Objects
 import java.nio.file.Files
 import java.nio.file.Paths
+import org.springframework.http.HttpStatus
+import javax.servlet.http.HttpServletResponse
 
 @Controller
 public class FileController {
@@ -85,15 +87,16 @@ public class FileController {
 	public fun download(request: HttpServletRequest, name: String): ResponseEntity<FileSystemResource> {
 		var file = File(config.filePath + File.separator + name)
 		var resource = FileSystemResource(file)
-		var headers = headers(file.length(), request, name)
-		return ResponseEntity.ok().headers(headers).body(resource)
+		var headers = headers(file, request)
+		return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT).headers(headers).body(resource)
 	}
 	
-	private fun headers(length: Long, request: HttpServletRequest, filename: String): HttpHeaders {
+	private fun headers(file: File, request: HttpServletRequest): HttpHeaders {
 		var headers = HttpHeaders()
 		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM)
-		headers.setContentLength(length)
-		headers.setContentDispositionFormData("attachment", encodeFilename(request, filename))
+		headers.setContentLength(file.length())
+		headers.setContentDispositionFormData("attachment", encodeFilename(request, file.name))
+		headers.set(HttpHeaders.ACCEPT_RANGES, "bytes");
 		return headers
 	}
 	
@@ -131,18 +134,16 @@ public class FileController {
 		if(tempFile.exists()){
 			return
 		}
-		
 		var input: InputStream? = null
-		var output: OutputStream? = null
+		var output = tempFile.outputStream()
 		try {
 			input = file.getInputStream()
-			output = FileOutputStream(tempFile)
 			IOUtils.copy(input, output)
 		} catch (e: IOException) {
 			logger.error("上传文件异常: {}", e.message, e)
 		} finally {
 			input?.close()
-			output?.close()
+			output.close()
 		}
 		thumbnail("f:\\ffmpeg\\ffmpeg.exe", tempFile.getAbsolutePath(), tempFile.getAbsolutePath() + ".jpg", 800, 600, 0, 3, 3)
 	}

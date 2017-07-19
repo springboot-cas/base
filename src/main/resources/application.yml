@@ -12,8 +12,8 @@ spring:
     
     http:
         multipart:
-            max-file-size: 1024Mb
-            max-request-size: 1024Mb
+            max-file-size: 2048Mb
+            max-request-size: 2048Mb
             
     kafka:
         bootstrap-servers: qingdao.gclasscn.com:9092
