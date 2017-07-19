@@ -106,6 +106,7 @@ public class FileController {
 			if (userAgent.indexOf("msie") != -1 || userAgent.indexOf("trident") != -1) {
 				return URLEncoder.encode(filename, "UTF-8")
 			}
+			return filename.toByteArray(Charsets.UTF_8).toString(Charsets.ISO_8859_1)
 		} catch (e: UnsupportedEncodingException) {
 			logger.error("转换文件名称失败, 不支持的编码格式: ", e.message, e)
 		}
