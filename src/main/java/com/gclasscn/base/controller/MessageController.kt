@@ -27,7 +27,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 
 @Controller
-public class MessageController {
+class MessageController {
 
 	private var logger = LoggerFactory.getLogger(MessageController::class.java)
 	

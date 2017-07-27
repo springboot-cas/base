@@ -41,7 +41,7 @@ import org.springframework.http.HttpStatus
 import javax.servlet.http.HttpServletResponse
 
 @Controller
-public class FileController {
+class FileController {
 	
 	private var logger = LoggerFactory.getLogger(FileController::class.java)
 	
@@ -52,7 +52,7 @@ public class FileController {
 	 * 列表页面
 	 */
 	@RequestMapping(value = "/files/list", method = arrayOf(RequestMethod.GET))
-	public fun index(): String {
+	fun index(): String {
 		return "file/file"
 	}
 
@@ -61,7 +61,7 @@ public class FileController {
 	 */
 	@RequestMapping(value = "/files", method = arrayOf(RequestMethod.GET))
 	@ResponseBody
-	public fun listBackups(pageNum: Int, size: Int, query: String): PageList<FileInfo> {
+	fun listBackups(pageNum: Int, size: Int, query: String): PageList<FileInfo> {
 		var dir = File(config.filePath)
 		if (!dir.exists()) {
 			throw FileNotFoundException("备份文件目录不存在, 请检查配置是否正确")
@@ -84,7 +84,7 @@ public class FileController {
 	 * 下载文件
 	 */
 	@RequestMapping(value = "/files/name", method = arrayOf(RequestMethod.GET))
-	public fun download(request: HttpServletRequest, name: String): ResponseEntity<FileSystemResource> {
+	fun download(request: HttpServletRequest, name: String): ResponseEntity<FileSystemResource> {
 		var file = File(config.filePath + File.separator + name)
 		var resource = FileSystemResource(file)
 		var headers = headers(file, request)
@@ -118,7 +118,7 @@ public class FileController {
 	 */
 	@RequestMapping(value = "/files/name", method = arrayOf(RequestMethod.DELETE))
 	@ResponseBody
-	public fun delete(name: String) {
+	fun delete(name: String) {
 		var file = File(config.filePath + File.separator + name)
 		if (file.exists()) {
 			file.delete()
@@ -130,7 +130,7 @@ public class FileController {
 	 */
 	@RequestMapping(value = "/files", method = arrayOf(RequestMethod.POST))
 	@ResponseBody
-	public fun upload(file: MultipartFile){
+	fun upload(file: MultipartFile){
 		var tempFile = File(config.filePath + File.separator + file.getOriginalFilename())
 		if(tempFile.exists()){
 			return
