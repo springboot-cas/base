@@ -1,65 +1,50 @@
 package com.gclasscn.base.controller
 
-import java.io.File
-import java.io.FileNotFoundException
-import java.io.FileOutputStream
-import java.io.IOException
-import java.io.InputStream
-import java.io.OutputStream
-import java.io.UnsupportedEncodingException
-import java.net.URLEncoder
-import java.util.Arrays
-import java.util.Date
-
-import javax.servlet.http.HttpServletRequest
-
+import com.gclasscn.base.config.CommonPropertyConfiguration
+import com.gclasscn.base.domain.FileInfo
+import com.gclasscn.base.domain.PageList
 import org.apache.commons.io.IOUtils
-import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.core.io.FileSystemResource
 import org.springframework.http.HttpHeaders
+import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestMethod
+import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.multipart.MultipartFile
-
-import com.gclasscn.base.config.CommonPropertyConfiguration
-import com.gclasscn.base.domain.FileInfo
-import com.gclasscn.base.domain.PageList
-import com.google.common.collect.Lists
-import java.util.Collections
-import java.io.FilenameFilter
+import java.io.File
 import java.io.FileFilter
-import java.util.Objects
-import java.nio.file.Files
-import java.nio.file.Paths
-import org.springframework.http.HttpStatus
-import javax.servlet.http.HttpServletResponse
+import java.io.FileNotFoundException
+import java.io.IOException
+import java.io.InputStream
+import java.io.UnsupportedEncodingException
+import java.net.URLEncoder
+import java.util.Date
+import javax.servlet.http.HttpServletRequest
 
 @Controller
 class FileController {
 	
-	private var logger = LoggerFactory.getLogger(FileController::class.java)
+	private val logger = LoggerFactory.getLogger(FileController::class.java)
 	
 	@Autowired
-	private var config = CommonPropertyConfiguration()
+	private val config = CommonPropertyConfiguration()
 	
 	/**
 	 * 列表页面
 	 */
-	@RequestMapping(value = "/files/list", method = arrayOf(RequestMethod.GET))
-	fun index(): String {
-		return "file/file"
-	}
+	@GetMapping("/files/list")
+	fun index() = "file/file"
 
 	/**
 	 * 列表数据
 	 */
-	@RequestMapping(value = "/files", method = arrayOf(RequestMethod.GET))
+	@GetMapping("/files")
 	@ResponseBody
 	fun listBackups(pageNum: Int, size: Int, query: String): PageList<FileInfo> {
 		var dir = File(config.filePath)
@@ -83,7 +68,7 @@ class FileController {
 	/**
 	 * 下载文件
 	 */
-	@RequestMapping(value = "/files/name", method = arrayOf(RequestMethod.GET))
+	@GetMapping("/files/name")
 	fun download(request: HttpServletRequest, name: String): ResponseEntity<FileSystemResource> {
 		var file = File(config.filePath + File.separator + name)
 		var resource = FileSystemResource(file)
@@ -116,7 +101,7 @@ class FileController {
 	/**
 	 * 删除文件
 	 */
-	@RequestMapping(value = "/files/name", method = arrayOf(RequestMethod.DELETE))
+	@DeleteMapping("/files/name")
 	@ResponseBody
 	fun delete(name: String) {
 		var file = File(config.filePath + File.separator + name)
@@ -128,7 +113,7 @@ class FileController {
 	/**
 	 * 上传文件
 	 */
-	@RequestMapping(value = "/files", method = arrayOf(RequestMethod.POST))
+	@PostMapping("/files")
 	@ResponseBody
 	fun upload(file: MultipartFile){
 		var tempFile = File(config.filePath + File.separator + file.getOriginalFilename())

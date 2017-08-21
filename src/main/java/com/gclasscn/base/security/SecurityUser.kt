@@ -9,7 +9,7 @@ class SecurityUser : org.springframework.security.core.userdetails.User{
 
 	var user: User? = null;
 	
-	constructor(user: User, authorities: MutableCollection<GrantedAuthority>):
+	constructor(user: User, authorities: MutableCollection<GrantedAuthority>) :
 			super(user.account, user.password, true, true, true, true, authorities) {
 		this.user = user;	
 	}

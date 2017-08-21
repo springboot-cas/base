@@ -12,9 +12,7 @@ operator fun String.unaryPlus(){
 }
 
 fun main(args: Array<String>) {
-	var names = listOf("诸葛建国", "西门富贵", "司马鞭")
-	names.forEach {
-		+ it
-	}
+	var names = listOf("诸葛建国", "西门富贵", "慕容广场", "司马鞭")
+	names.forEach { + it }
  	list.forEach { println(it) }		
 }

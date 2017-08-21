@@ -1,5 +1,5 @@
 server:
-    port: 8080
+    port: 9080
     context-path: /base
 
 spring:
@@ -16,22 +16,18 @@ spring:
             max-request-size: 2048Mb
             
     kafka:
-        bootstrap-servers: qingdao.gclasscn.com:9092
+        bootstrap-servers: 127.0.0.1:9092
         producer:
             batch-size: 1000
-            key-serializer: org.apache.kafka.common.serialization.StringSerializer
-            value-serializer: org.apache.kafka.common.serialization.StringSerializer
         consumer:
             group-id: base
-            key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-            value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
         template:
             default-topic: my-topic
         listener:
             concurrency: 5
 
 management:
-    port: 8081 
+    port: 9081 
     security:
         enabled: false
 
@@ -43,14 +39,14 @@ logging:
 file-path: G://backup
 
 #restful urls
-user-urls: ["http://qingdao.gclasscn.com:9003", "http://localhost:9003"]
+user-urls: ["http://192.168.1.6:9003", "http://localhost:9003"]
 
 #layout
 layout: content
 full-layout: full-layout
 
 #cas configurations
-cas-server: http://qingdao.gclasscn.com/cas
-cas-service: http://127.0.0.1:8080/base/login/cas
-cas-login: http://qingdao.gclasscn.com/cas/login
-cas-logout: http://qingdao.gclasscn.com/cas/logout?service=http://127.0.0.1:8080/base
+cas-server: http://127.0.0.1:8080/cas
+cas-service: http://127.0.0.1:9080/base/login/cas
+cas-login: http://127.0.0.1:8080/cas/login
+cas-logout: http://127.0.0.1:8080/cas/logout?service=http://127.0.0.1:9080/base
